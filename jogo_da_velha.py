@@ -39,10 +39,24 @@ time.sleep(3)
 print(f"{jogador1}(O) vs {jogador2}(x)!")
 
 def checar_vitoria(elemento: list) -> bool:
-    for i in range(len(elemento) - 2):
-        if (elemento[i] == elemento[i + 1] == elemento[i + 2] or elemento[i -1] == elemento[i] == elemento[i + 1] or
-            elemento[i - 2] == elemento[i - 1] == elemento[i]) and elemento[i] != " ":
+    combinacoes_vencedoras = [
+        # Horizontais
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        # Verticais
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        # Diagonais
+        [0, 4, 8],
+        [2, 4, 6]
+    ]
+
+    for a, b, c in combinacoes_vencedoras:
+        if elemento[a] == elemento[b] == elemento[c] and elemento[a] != " ":
             return True
+    return False
         
     for i in range(len(elemento) - 6):
         if (elemento[i] == elemento[i + 3] == elemento[i + 6] or elemento[i - 3] == elemento[i] == elemento[i + 3] or
@@ -102,5 +116,6 @@ for num_rodada_atual in range(1, 10):
         break
 
     time.sleep(0.5)
+
 
 print("O jogo acabou.")
